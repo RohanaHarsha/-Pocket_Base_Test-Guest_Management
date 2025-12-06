@@ -88,9 +88,10 @@ npm install react-router-dom
 npm install pocketbase
 npm install tailwindcss @tailwindcss/vite
 
-# add tailwindcss() to the array of the jason-lock.js dependancy file 
+# add tailwindcss() to the array of the jason-lock.js dependancy file
 
-#run npm run dev
+run npm run dev
+
 ```
 ### 2nd Terminal (pocketbase)
 
