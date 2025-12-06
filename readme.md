@@ -2,7 +2,7 @@
 
 
 
-///////////////////////////////////////////////
+# Note:
 pocketbase exe cannot be in the same folder as in the pocketbaseapi because it confusus the runtime and give resolver error
 
 # Hotel Guest Management App
@@ -24,25 +24,23 @@ A modern, responsive web application for managing hotel guests. Built with **Rea
 
 ## Project Overview
 
-This app provides a streamlined interface to manage hotel guests, including registration, listing, editing, and deleting guest records. It emphasizes **clean UI**, **smooth interactions**, and **easy data management** through PocketBase.
+This app provides a streamlined interface to manage hotel guests, including registration, listing, editing, and deleting guest records. testing newest database technology waas the main purpose here.
 
 ---
 
 ## Features
 
+- **PocketBase Integration**: Stores guest data securely in PocketBase collections.
 - **Guest Registration**: Add new guest details, including name, email, and date of birth.
 - **Guest List**: View all registered guests in a searchable, sortable table.
 - **Edit Guest**: Update guest details via a dedicated edit page.
 - **Delete Guest**: Remove guests from the system with a confirmation step.
 - **Tailwind Styling**: Clean, modern design with custom cards, buttons, forms, and alerts.
-- **PocketBase Integration**: Stores guest data securely in PocketBase collections.
+
 
 
 ## Tech Stack
 
-- **Frontend**: React, TypeScript, Tailwind CSS  
-- **Routing**: React Router DOM  
-- **Backend**: PocketBase  
 - **Build Tool**: Vite  
 - **Version Control**: Git  
 
@@ -70,7 +68,7 @@ This app provides a streamlined interface to manage hotel guests, including regi
     └─ README.md
 ```
 
-## Installation
+## Local Installation
 
 **Split the terminal to run PocketBase as well**
 
@@ -84,16 +82,10 @@ This app provides a streamlined interface to manage hotel guests, including regi
 # go to client folder
 cd client
 
-# install dependencies
+# install dependencies (No need to install if you already have them installed)
 npm install
-
-# install react-router
 npm install react-router-dom
-
-# install pocketbase client
 npm install pocketbase
-
-# install tailwindcss + vite plugin
 npm install tailwindcss @tailwindcss/vite
 
 # add tailwindcss() to the array of the jason-lock.js dependancy file 
@@ -104,9 +96,6 @@ npm install tailwindcss @tailwindcss/vite
 
 *Current directory: `hotel-guet-management`*
 ```bash
-#note
-#you can change the pocketbase credentials in pocketbase.ts in server folder inside of the client
-
 # go to server folder
 cd server
 
@@ -115,3 +104,8 @@ cd pocketbase_setup
 
 #run(where the pocketbase exe exist)
 ./pocketbase serve
+#note:
+#you can change the pocketbase credentials in pocketbase.ts in server folder inside of the client
+#default credentials
+ test@gmail.com
+ 12345678
