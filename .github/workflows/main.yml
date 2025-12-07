@@ -3,10 +3,10 @@ name: development Workflow
 on:
   push:
     branches:
-      - development
+      - main
   pull_request:
     branches:
-      - development
+      - main
 
 jobs:
   build:
@@ -25,5 +25,8 @@ jobs:
 
       - name: Run 
         run: npm run dev
+        
+      - name: pocketbase
+        run: cd server/pocketbase_setup && ./pocketbase serve
 
 
