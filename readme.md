@@ -24,7 +24,7 @@ A modern, responsive web application for managing hotel guests. Built with **Rea
 
 ## Project Overview
 
-This app provides a streamlined interface to manage hotel guests, including registration, listing, editing, and deleting guest records. testing newest database technology waas the main purpose here.
+This app provides a streamlined interface to manage hotel guests, including registration, listing, editing, and deleting guest records. testing newest database technology was the main purpose here.
 
 ---
 
