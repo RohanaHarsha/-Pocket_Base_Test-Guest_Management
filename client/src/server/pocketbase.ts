@@ -16,6 +16,8 @@ export const initAuth = async () => {
 // Call auth on module load
 initAuth().catch(console.error);
 
+
+// this script will be auto generated according to your preferef languae by pocketbase
 // CRUD helpers
 export const getGuests = async (): Promise<Guest[]> => {
   const records = await pb.collection("guests").getFullList({
