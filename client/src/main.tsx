@@ -4,7 +4,7 @@ import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route } 
 import App from './App.tsx';
 import GuestList from './pages/GuestList.tsx';
 import GuestRegistration from "./pages/GuestRegistration"
-import {Home} from './pages/Home.tsx';
+import { Home } from './pages/Home.tsx';
 import GuestEdit from './pages/GuestEdit.tsx';
 
 const router = createBrowserRouter(
@@ -13,7 +13,7 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="GuestRegistration" element={<GuestRegistration />} />
       <Route path="GuestList" element={<GuestList />} />
-      <Route path="guests/:id" element={<GuestEdit />} />
+      <Route path="guests/:id" element={<GuestEdit id={""} />} />
     </Route>
   )
 );
