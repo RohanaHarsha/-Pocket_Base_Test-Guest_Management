@@ -1,7 +1,7 @@
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 
 export const Home = () => {
-  const navigate = useNavigate();
+  
 
   return (
     <div className="space-y-8">

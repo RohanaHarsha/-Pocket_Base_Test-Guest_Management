@@ -16,12 +16,10 @@ const GuestEdit = () => {
     if (!id) return;
 
     // Fetch guest record from PocketBase
-    pb.collection("guests")
-      .getOne(id)
-      .then((record) => {
-        setGuest(record as Guest);
-        setLoading(false);
-      })
+    pb.collection("guests").getOne(id).then((record) => {
+      setGuest(record as unknown as Guest);
+      setLoading(false);
+    })
       .catch((err) => {
         console.error(err);
         setLoading(false);
@@ -36,9 +34,16 @@ const GuestEdit = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!guest) return;
+
+    // 💡 IMPROVED CHECK: Ensure 'guest' exists AND 'guest.id' exists.
+    if (!guest || !guest.id) {
+      alert("Error: Guest data or ID is missing.");
+      console.error("Guest or Guest ID is null/undefined at time of submit.");
+      return;
+    }
 
     try {
+      // TypeScript is now 100% sure 'guest' is a non-null object with an 'id' property.
       await pb.collection("guests").update(guest.id, {
         first_name: guest.first_name,
         last_name: guest.last_name,

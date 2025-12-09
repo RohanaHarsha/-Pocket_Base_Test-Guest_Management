@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { Guest } from '../server/Guest.ts';
 import { getGuests, deleteGuest } from '../server/pocketbase.ts';
@@ -7,7 +7,7 @@ export default function GuestList() {
   const [guests, setGuests] = useState<Guest[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm] = useState('');
   const navigate = useNavigate();
 
   // Fetch guests on component mount
@@ -146,7 +146,7 @@ export default function GuestList() {
                     </td>
                     <td>
                       <div className="text-sm text-gray-900">
-                        {new Date(guest.date_of_birth).toLocaleDateString()}
+                        {new Date(guest.date_of_birth || '').toLocaleDateString() || 'N/A'}
                       </div>
                     </td>
                     <td>
