@@ -146,11 +146,7 @@ export default function GuestList() {
                     </td>
                     <td>
                       <div className="text-sm text-gray-900">
-<<<<<<< HEAD
                         {new Date(guest.date_of_birth || '').toLocaleDateString() || 'N/A'}
-=======
-                       {new Date(guest.date_of_birth || '').toLocaleDateString() || 'N/A'}
->>>>>>> 7bf0d98db02ab021a683f241953a9f448e716528
                       </div>
                     </td>
                     <td>

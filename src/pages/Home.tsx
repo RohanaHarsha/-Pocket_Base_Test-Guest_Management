@@ -1,13 +1,7 @@
-<<<<<<< HEAD
 //import { useNavigate } from 'react-router-dom';
 
 export const Home = () => {
   
-=======
-
-
-export const Home = () => {
->>>>>>> 7bf0d98db02ab021a683f241953a9f448e716528
 
   return (
     <div className="space-y-8">

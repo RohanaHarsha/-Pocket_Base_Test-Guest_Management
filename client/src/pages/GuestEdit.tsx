@@ -1,20 +1,26 @@
 import { useEffect, useState } from "react";
-import type { ChangeEvent, FormEvent } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import PocketBase from "pocketbase";
-import type { Guest } from "../server/Guest.ts";
+import type { Guest, GuestPayload } from "../server/Guest";
 
-const pb = new PocketBase("http://127.0.0.1:8090"); // Replace with your PocketBase URL
+const pb = new PocketBase("http://127.0.0.1:8090");
 
-const GuestEdit = () => {
-  const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
+type Props = {
+  id: string;
+};
+
+export default function GuestEdit({ id }: Props) {
   const [guest, setGuest] = useState<Guest | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // Load guest on mount
   useEffect(() => {
-    if (!id) return;
+    const load = async () => {
+      const record = await pb.collection("guests").getOne(id);
+      setGuest(record as unknown as Guest);
+      setLoading(false);
+    };
 
+<<<<<<< HEAD
     // Fetch guest record from PocketBase
     pb.collection("guests").getOne(id).then((record) => {
       setGuest(record as unknown as Guest);
@@ -59,90 +65,105 @@ const GuestEdit = () => {
     }
   };
 
+=======
+    load();
+  }, [id]);
+
+>>>>>>> 7bf0d98db02ab021a683f241953a9f448e716528
   if (loading) return <div>Loading...</div>;
   if (!guest) return <div>Guest not found</div>;
 
+  // Handle input changes safely
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setGuest((prev: any) =>
+      prev
+        ? {
+            ...prev,
+            [name]: value,
+          }
+        : prev
+    );
+  };
+
+  // Submit updates
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Build a proper GuestPayload
+    const payload: GuestPayload = {
+      first_name: guest.first_name,
+      last_name: guest.last_name,
+      email: guest.email,
+      phone: guest.phone,
+      address: guest.address,
+      date_of_birth: guest.date_of_birth,
+    };
+
+    await pb.collection("guests").update(guest.id!, payload);
+
+    alert("Updated successfully!");
+  };
+
   return (
-    <div className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-md">
-      <h2 className="text-xl font-bold mb-4">Edit Guest</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-gray-700 mb-1">First Name</label>
-          <input
-            type="text"
-            name="name"
-            value={guest.first_name}
-            onChange={handleChange}
-            className="w-full border border-gray-300 rounded px-3 py-2"
-            required
-          />
-        </div>
-        <div>
-          <label className="block text-gray-700 mb-1">Last Name</label>
-          <input
-            type="text"
-            name="name"
-            value={guest.last_name}
-            onChange={handleChange}
-            className="w-full border border-gray-300 rounded px-3 py-2"
-            required
-          />
-        </div>
+    <form onSubmit={handleSubmit}>
+      <label>
+        First name:
+        <input
+          name="first_name"
+          value={guest.first_name}
+          onChange={handleChange}
+        />
+      </label>
 
-        <div>
-          <label className="block text-gray-700 mb-1">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={guest.email}
-            onChange={handleChange}
-            className="w-full border border-gray-300 rounded px-3 py-2"
-            required
-          />
-        </div>
+      <label>
+        Last name:
+        <input
+          name="last_name"
+          value={guest.last_name}
+          onChange={handleChange}
+        />
+      </label>
 
-        <div>
-          <label className="block text-gray-700 mb-1">Address</label>
-          <input
-            type="text"
-            name="address"
-            value={guest.address}
-            onChange={handleChange}
-            className="w-full border border-gray-300 rounded px-3 py-2"
-            required
-          />
-        </div>
+      <label>
+        Email:
+        <input
+          name="email"
+          value={guest.email}
+          onChange={handleChange}
+        />
+      </label>
 
-        <div>
-          <label className="block text-gray-700 mb-1">Date of Birth</label>
-          <input
-            type="date"
-            name="date_of_birth"
-            value={guest.date_of_birth}
-            onChange={handleChange}
-            className="w-full border border-gray-300 rounded px-3 py-2"
-            required
-          />
-        </div>
+      <label>
+        Phone:
+        <input
+          name="phone"
+          value={guest.phone ?? ""}
+          onChange={handleChange}
+        />
+      </label>
 
-        <div className="flex justify-end space-x-2">
-          <button
-            type="button"
-            onClick={() => navigate("/GuestList")}
-            className="px-4 py-2 border rounded text-gray-700 hover:bg-gray-100"
-          >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-          >
-            Save
-          </button>
-        </div>
-      </form>
-    </div>
+      <label>
+        Address:
+        <input
+          name="address"
+          value={guest.address ?? ""}
+          onChange={handleChange}
+        />
+      </label>
+
+      <label>
+        Date of birth:
+        <input
+          name="date_of_birth"
+          type="date"
+          value={guest.date_of_birth?.substring(0, 10) ?? ""}
+          onChange={handleChange}
+        />
+      </label>
+
+      <button type="submit">Save</button>
+    </form>
   );
-};
-
-export default GuestEdit;
+}
